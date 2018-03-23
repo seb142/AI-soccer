@@ -1,10 +1,13 @@
 
 public class Main{
 
-public static void main(String[] args) {
+	public void run(){
 
-	new Main();
-	System.out.println("hello world");
+		System.out.println("tjena");
+	}
 
+	public static void main(String[] args) {
+		Main main = new Main();
+		main.run();
 	}
 }
