@@ -39,13 +39,13 @@ public class TankOne{
   
     public void keyPressed(){
     if(key == CODED){
-      if(keyCode == UP && (position.y > 0)){
+      if(keyCode == UP && (position.y > 25)){
         position.y--;
-      }else if(keyCode == DOWN && (position.y < 600)){
+      }else if(keyCode == DOWN && (position.y < 575)){
         position.y++;
-      }else if(keyCode == LEFT && (position.x > 0)){
+      }else if(keyCode == LEFT && (position.x > 25)){
         position.x--;
-      }else if(keyCode == RIGHT && position.x < 800){
+      }else if(keyCode == RIGHT && position.x < 775){
         position.x++;
       }
     }
