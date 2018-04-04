@@ -4,6 +4,7 @@ public class TankOne{
   PVector position;
   PVector velocity;
   PVector acceleration;
+  boolean collision;
 
   TankOne(float x, float y){
     this.radius = radius;
@@ -37,15 +38,23 @@ public class TankOne{
     
   }
   
+  void checkCollision(TankTwo other){
+    //Should take the position of this tank and check it's area and if it overlaps another tanks area
+    //Return a bool if it is true or not and use that in keyPressed() for collisioncheck
+    if(dist(position.x, position.y, other.position.x, other.position.y) < 50){
+      collision = true;
+    }
+  }
+  
     public void keyPressed(){
     if(key == CODED){
-      if(keyCode == UP && (position.y > 25)){
+      if(keyCode == UP && (position.y > 25) && !collision){
         position.y--;
-      }else if(keyCode == DOWN && (position.y < 575)){
+      }else if(keyCode == DOWN && (position.y < 575) && !collision){
         position.y++;
-      }else if(keyCode == LEFT && (position.x > 25)){
+      }else if(keyCode == LEFT && (position.x > 25) && !collision){
         position.x--;
-      }else if(keyCode == RIGHT && position.x < 775){
+      }else if(keyCode == RIGHT && (position.x < 775)  && !collision){
         position.x++;
       }
     }
