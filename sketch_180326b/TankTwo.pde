@@ -19,9 +19,7 @@ public class TankTwo{
   public void moveForward(){
     velocity.rotate(0.2);
     position.add(velocity);
-    System.out.println("poxition: " + position);
-    System.out.println("velocity: " + velocity);
-    System.out.println("heading" + velocity.heading2D());
+ 
 
   }
 
