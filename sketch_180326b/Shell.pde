@@ -1,13 +1,12 @@
 public class Shell{
-  int x;
-  int y;
+  PVector position;
+  PVector velocity;
   int radius;
 
-  Shell(int x, int y, int radius) {
-    this.x = x;
-    this.y = y;
+  Shell(float x, float y, int radius) {
+    position = new PVector(x,y);
+    velocity = new PVector(0,0);
     this.radius = radius;
-
   }
 
   public void movement(){
@@ -15,6 +14,13 @@ public class Shell{
   
   }
 
-
+  public void run(){
+    display();
+  }
+  
+  public void display(){
+    fill(0, 0, 102);
+    ellipse(position.x, position.y, 15, 15);
+  }
 
 }

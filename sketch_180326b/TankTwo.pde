@@ -4,6 +4,7 @@ public class TankTwo{
   PVector position;
   PVector velocity;
   PVector acceleration;
+  Turret turret;
 
   TankTwo(float x, float y){
     this.radius = 20;
@@ -58,9 +59,10 @@ public class TankTwo{
   }
   
   void display() {
-    // Draw a triangle rotated in the direction of velocity
+      fill(128, 204, 255);
     ellipse(position.x,position.y,50,50);
-    ellipse(position.x,position.y,30,30);
+    turret = new Turret(position.x, position.y, 30);
+    turret.run();
   }
 
 }

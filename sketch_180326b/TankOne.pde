@@ -5,9 +5,9 @@ public class TankOne{
   PVector velocity;
   PVector acceleration;
   boolean collision;
+  Turret turret;
 
   TankOne(float x, float y){
-    this.radius = radius;
     this.radius = 20;
     acceleration = new PVector(0, 0);
     position = new PVector(x, y); 
@@ -58,6 +58,7 @@ public class TankOne{
       }else if(keyCode == LEFT){
         //position.x--;
         velocity.rotate(-0.05);
+        
       }else if(keyCode == RIGHT){
         //position.x++;
         velocity.rotate(0.05);
@@ -76,9 +77,10 @@ public class TankOne{
   
   
   void display() {
-    // Draw a triangle rotated in the direction of velocity
+    fill(128, 204, 255);
     ellipse(position.x,position.y,50,50);
-    ellipse(position.x,position.y,30,30);
+    turret = new Turret(position.x, position.y, 30);
+    turret.run();
   }
 
 }
