@@ -49,24 +49,28 @@ public class TankOne{
     public void keyPressed(){
     if(keyPressed == true){
       if(keyCode == UP && ((position.y > 25 || velocity.heading() > 0) && (position.y < 575 || velocity.heading() < 0) && ((position.x > 25 || (velocity.heading() > -1.5) && (velocity.heading() < 1.5))) && (position.y < 575 || velocity.heading() < 0)) && ((position.x < 775 || (velocity.heading() < -1.5 || velocity.heading() > 1.5)))){
-        //position.y--;
         System.out.println(velocity);
         position.add(velocity);
       }else if(keyCode == DOWN && ((position.y > 25 || velocity.heading() < 0) && (position.y < 575 || velocity.heading() > 0)) && (position.x > 25 || (velocity.heading() > 1.5 || velocity.heading() < -1.5)) && (position.x < 775 || (velocity.heading() < 1.5 && velocity.heading() > -1.5))){
-        //position.y++;
         position.sub(velocity);
       }else if(keyCode == LEFT){
-        //position.x--;
         velocity.rotate(-0.05);
         
       }else if(keyCode == RIGHT){
-        //position.x++;
         velocity.rotate(0.05);
       }
     System.out.println("poxition: " + position);
     System.out.println("velocity: " + velocity);
     System.out.println("heading" + velocity.heading2D());
     }
+  }
+  
+  public void drawTank(){
+    fill(128, 204, 255);
+    ellipse(position.x,position.y,50,50);
+    strokeWeight(2);
+    line(position.x, position.y, position.x, position.y+25);
+    strokeWeight(1);
   }
   
   void run(){
@@ -77,8 +81,7 @@ public class TankOne{
   
   
   void display() {
-    fill(128, 204, 255);
-    ellipse(position.x,position.y,50,50);
+    drawTank();
     turret = new Turret(position.x, position.y, 30);
     turret.run();
   }

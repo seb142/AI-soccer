@@ -15,13 +15,17 @@ public class Turret{
     this.radius = radius;
   }
   
+  public void drawTurret(){
+    fill(0, 153, 255);
+    ellipse(position.x,position.y,30,30);
+  }
+  
   public void run(){
     display();
   }
   
   public void display(){
-    fill(0, 153, 255);
-    ellipse(position.x,position.y,30,30);
+    drawTurret();
     shell = new Shell(position.x, position.y, 15);
     shell.run();
   }

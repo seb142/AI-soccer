@@ -13,14 +13,18 @@ public class Shell{
 
   
   }
+  
+  public void drawShell(){
+    fill(0, 0, 102);
+    ellipse(position.x, position.y, 15, 15);
+  }
 
   public void run(){
     display();
   }
   
   public void display(){
-    fill(0, 0, 102);
-    ellipse(position.x, position.y, 15, 15);
+    drawShell();
   }
 
 }
