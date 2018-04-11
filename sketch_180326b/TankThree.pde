@@ -1,4 +1,4 @@
-public class TankThree{
+public class TankThree extends Tank{
  int health = 10;
   int radius;
   PVector position;
@@ -18,6 +18,7 @@ public class TankThree{
   }
 
   public void keyPressed(){
+    checkCollision();
     if(keyPressed == true){
       if(keyCode == UP && ((position.y > 25 || velocity.heading() > 0) && (position.y < 575 || velocity.heading() < 0) && ((position.x > 25 || (velocity.heading() > -1.5) && (velocity.heading() < 1.5))) && (position.y < 575 || velocity.heading() < 0)) && ((position.x < 775 || (velocity.heading() < -1.5 || velocity.heading() > 1.5)))){
         //position.y--;

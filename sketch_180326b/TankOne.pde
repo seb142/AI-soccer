@@ -1,10 +1,9 @@
-public class TankOne{
+public class TankOne extends Tank{
   int health = 10;
   int radius;
   PVector position;
   PVector velocity;
   PVector acceleration;
-  boolean collision;
   Turret turret;
 
   TankOne(float x, float y){
@@ -38,15 +37,17 @@ public class TankOne{
     
   }
   
+  /*
   void checkCollision(TankTwo other){
     //Should take the position of this tank and check it's area and if it overlaps another tanks area
     //Return a bool if it is true or not and use that in keyPressed() for collisioncheck
     if(dist(position.x, position.y, other.position.x, other.position.y) < 50){
       collision = true;
     }
-  }
+  }*/
   
     public void keyPressed(){
+      checkCollision();
     if(keyPressed == true){
       if(keyCode == UP && ((position.y > 25 || velocity.heading() > 0) && (position.y < 575 || velocity.heading() < 0) && ((position.x > 25 || (velocity.heading() > -1.5) && (velocity.heading() < 1.5))) && (position.y < 575 || velocity.heading() < 0)) && ((position.x < 775 || (velocity.heading() < -1.5 || velocity.heading() > 1.5)))){
         System.out.println(velocity);
