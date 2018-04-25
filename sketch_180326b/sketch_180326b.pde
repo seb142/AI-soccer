@@ -1,26 +1,50 @@
-TankOne t1t1 = new TankOne(100, 50);
+import game2dai.entities.*;
+import game2dai.entityshapes.ps.*;
+import game2dai.maths.*;
+import game2dai.*;
+import game2dai.entityshapes.*;
+import game2dai.fsm.*;
+import game2dai.steering.*;
+import game2dai.utils.*;
+import game2dai.graph.*;
+
+World world;
+StopWatch sw;
+TankOne t1t1 = new TankOne(new Vector2D(100,100), // position
+  20, // collision radius
+  Vector2D.ZERO, // velocity
+  70, // maximum speed
+  Vector2D.random(null), // heading
+  1.5, // mass
+  2.5f, // turning rate
+  2500);
 TankTwo t2t1 = new TankTwo(400, 50);
 TankThree t3t1 = new TankThree(600, 50);
 Team team1 = new Team(t1t1,t2t1,t3t1);
 
-TankOne t1t2 = new TankOne(100, 500);
-TankTwo t2t2= new TankTwo(400, 500);
-TankThree t3t2= new TankThree(600, 500);
-Team team2 = new Team(t1t1,t2t1,t3t1);
+
 
 boolean running = true;
 
 void setup() {
   size(800, 600);
+  world = new World(800, 600);
+  sw = new StopWatch();
+  t1t1.AP().wanderOn().wanderFactors(60, 30, 20);
+  CatPic view = new CatPic(PApplet.TWO_PI,()2,2,2,2);
+  t1t1.renderer(view);
+  Domain d = new Domain(0, 0, 800, 600);
+  t1t1.worldDomain(d, SBF.WRAP);
+  world.add(t1t1);
+  sw.reset();
+
 }
 
 void draw(){
+  double elapsedTime = sw.getElapsedTime();
+  world.update(elapsedTime);
   background(255);
-  t1t1.run();
-  t2t1.run();
-  t3t1.run();
-  t1t2.run();
-  t2t2.run();
-  t3t2.run();
+  world.draw(elapsedTime);
+
 
 }

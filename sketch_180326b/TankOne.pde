@@ -1,21 +1,22 @@
-public class TankOne{
+public class TankOne extends Vehicle{
   int health = 10;
   int radius;
-  PVector position;
-  PVector velocity;
+  Vector2D position;
+  Vector2D velocity;
+  Vector2D heading;
   PVector acceleration;
   boolean collision;
   Turret turret;
 
-  TankOne(float x, float y){
+  public TankOne(Vector2D position, double radius, Vector2D velocity, 
+  double max_speed, Vector2D heading, double mass, 
+  double max_turn_rate, double max_force){
+    super(position, radius, velocity, max_speed, heading, mass, max_turn_rate, 
+    max_force);
     this.radius = 20;
-    acceleration = new PVector(0, 0);
-    position = new PVector(x, y); 
-    if(y > 400) {
-      velocity = new PVector(0, -1);
-    }else{
-      velocity = new PVector(0, 1);
-    }
+    this.position = position;
+    
+
   }
 
   public void moveForward(){
@@ -39,37 +40,16 @@ public class TankOne{
   }
   
   void checkCollision(TankTwo other){
-    //Should take the position of this tank and check it's area and if it overlaps another tanks area
-    //Return a bool if it is true or not and use that in keyPressed() for collisioncheck
-    if(dist(position.x, position.y, other.position.x, other.position.y) < 50){
-      collision = true;
-    }
+
   }
   
-    public void keyPressed(){
-    if(keyPressed == true){
-      if(keyCode == UP && ((position.y > 25 || velocity.heading() > 0) && (position.y < 575 || velocity.heading() < 0) && ((position.x > 25 || (velocity.heading() > -1.5) && (velocity.heading() < 1.5))) && (position.y < 575 || velocity.heading() < 0)) && ((position.x < 775 || (velocity.heading() < -1.5 || velocity.heading() > 1.5)))){
-        System.out.println(velocity);
-        position.add(velocity);
-      }else if(keyCode == DOWN && ((position.y > 25 || velocity.heading() < 0) && (position.y < 575 || velocity.heading() > 0)) && (position.x > 25 || (velocity.heading() > 1.5 || velocity.heading() < -1.5)) && (position.x < 775 || (velocity.heading() < 1.5 && velocity.heading() > -1.5))){
-        position.sub(velocity);
-      }else if(keyCode == LEFT){
-        velocity.rotate(-0.05);
-        
-      }else if(keyCode == RIGHT){
-        velocity.rotate(0.05);
-      }
-    System.out.println("poxition: " + position);
-    System.out.println("velocity: " + velocity);
-    System.out.println("heading" + velocity.heading2D());
-    }
-  }
+
   
   public void drawTank(){
     fill(128, 204, 255);
-    ellipse(position.x,position.y,50,50);
+    ellipse((float)position.x,(float)position.y,50,50);
     strokeWeight(2);
-    line(position.x, position.y, position.x, position.y+25);
+    line((float)position.x, (float)position.y, (float)position.x, (float)position.y+25);
     strokeWeight(1);
   }
   
@@ -82,8 +62,71 @@ public class TankOne{
   
   void display() {
     drawTank();
-    turret = new Turret(position.x, position.y, 30);
+    turret = new Turret((float)position.x, (float)position.y, 30);
     turret.run();
   }
 
+}
+
+
+public class CatPic extends PicturePS {
+
+  int head, eye, whiskers;
+  float size;
+
+  public CatPic(PApplet app, float size, int body, int eye, int whiskers) {
+    super(app);
+    this.size = size;
+    this.head = body;
+    this.eye = eye;
+    this.whiskers = whiskers;
+  }
+
+  public CatPic(PApplet app, float size) {
+    this(app, size, color(255, 169, 19), color(100, 100, 200), color(0));
+  }
+
+
+  public void draw(BaseEntity user, float posX, float posY, float velX, 
+  float velY, float headX, float headY, float etime) {
+
+    // Draw and hints that are specified and relevant
+    if (hints != 0) {
+      Hints.hintFlags = hints;
+      Hints.draw(app, user, velX, velY, headX, headY);
+    }
+    // Determine the angle the tank is heading
+    float angle = PApplet.atan2(headY, headX);
+
+    // Prepare to draw the entity    
+    pushStyle();
+    pushMatrix();
+    translate(posX, posY);
+    rotate(angle);
+
+    // Draw the entity  
+    ellipseMode(PApplet.CENTER);
+    stroke(whiskers);
+    strokeWeight(1);
+    line(0.3f*size, -0.35f*size, 0.4f*size, 0.35f*size);
+    line(0.4f*size, -0.35f*size, 0.3f*size, 0.35f*size);
+
+    stroke(whiskers);
+    strokeWeight(0.5f);
+    fill(head);
+
+    arc(0.05f*size, 0, 0.5f*size, 1.2f*size, PApplet.HALF_PI - 0.1f, 3* PApplet.HALF_PI + 0.1f, PApplet.CHORD);
+    ellipse(0, 0, 0.7f*size, 0.7f*size);
+
+    fill(whiskers);
+    ellipse(0.35f*size, 0, 0.14f*size, 0.2f*size);
+
+    fill(eye);
+    ellipse(0.12f*size, 0.18f*size, 0.12f*size, 0.22f*size);
+    ellipse(0.12f*size, -0.18f*size, 0.12f*size, 0.22f*size);
+
+    // Finished drawing
+    popMatrix();
+    popStyle();
+  }
 }
