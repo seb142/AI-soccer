@@ -69,12 +69,12 @@ public class TankOne extends Vehicle{
 }
 
 
-public class CatPic extends PicturePS {
+public class TankPic extends PicturePS {
 
   int head, eye, whiskers;
   float size;
 
-  public CatPic(PApplet app, float size, int body, int eye, int whiskers) {
+  public TankPic(PApplet app, float size, int body, int eye, int whiskers) {
     super(app);
     this.size = size;
     this.head = body;
@@ -82,7 +82,7 @@ public class CatPic extends PicturePS {
     this.whiskers = whiskers;
   }
 
-  public CatPic(PApplet app, float size) {
+  public TankPic(PApplet app, float size) {
     this(app, size, color(255, 169, 19), color(100, 100, 200), color(0));
   }
 
@@ -105,25 +105,9 @@ public class CatPic extends PicturePS {
     rotate(angle);
 
     // Draw the entity  
-    ellipseMode(PApplet.CENTER);
-    stroke(whiskers);
-    strokeWeight(1);
-    line(0.3f*size, -0.35f*size, 0.4f*size, 0.35f*size);
-    line(0.4f*size, -0.35f*size, 0.3f*size, 0.35f*size);
 
-    stroke(whiskers);
-    strokeWeight(0.5f);
-    fill(head);
-
-    arc(0.05f*size, 0, 0.5f*size, 1.2f*size, PApplet.HALF_PI - 0.1f, 3* PApplet.HALF_PI + 0.1f, PApplet.CHORD);
     ellipse(0, 0, 0.7f*size, 0.7f*size);
 
-    fill(whiskers);
-    ellipse(0.35f*size, 0, 0.14f*size, 0.2f*size);
-
-    fill(eye);
-    ellipse(0.12f*size, 0.18f*size, 0.12f*size, 0.22f*size);
-    ellipse(0.12f*size, -0.18f*size, 0.12f*size, 0.22f*size);
 
     // Finished drawing
     popMatrix();

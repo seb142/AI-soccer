@@ -18,9 +18,14 @@ TankOne t1t1 = new TankOne(new Vector2D(100,100), // position
   1.5, // mass
   2.5f, // turning rate
   2500);
-TankTwo t2t1 = new TankTwo(400, 50);
-TankThree t3t1 = new TankThree(600, 50);
-Team team1 = new Team(t1t1,t2t1,t3t1);
+TankOne t1t2 = new TankOne(new Vector2D(100,100), // position
+  20, // collision radius
+  Vector2D.ZERO, // velocity
+  70, // maximum speed
+  Vector2D.random(null), // heading
+  1.5, // mass
+  2.5f, // turning rate
+  2500);
 
 
 
@@ -31,11 +36,18 @@ void setup() {
   world = new World(800, 600);
   sw = new StopWatch();
   t1t1.AP().wanderOn().wanderFactors(60, 30, 20);
-  CatPic view = new CatPic(PApplet.TWO_PI,()2,2,2,2);
+  t1t2.AP().wanderOn().wanderFactors(60, 30, 20);
+  TankPic view = new TankPic(this, (float)50);
+  TankPic view2 = new TankPic(this, (float)50);
+
   t1t1.renderer(view);
+  t1t2.renderer(view);
   Domain d = new Domain(0, 0, 800, 600);
   t1t1.worldDomain(d, SBF.WRAP);
+  t1t2.worldDomain(d, SBF.WRAP);
+
   world.add(t1t1);
+  world.add(t1t2);
   sw.reset();
 
 }
