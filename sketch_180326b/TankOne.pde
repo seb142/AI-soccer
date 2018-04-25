@@ -68,19 +68,17 @@ public class TankOne extends Vehicle{
 
 public class TankPic extends PicturePS {
 
-  int head, eye, whiskers;
+  int head;
   float size;
 
-  public TankPic(PApplet app, float size, int body, int eye, int whiskers) {
+  public TankPic(PApplet app, float size, int body) {
     super(app);
     this.size = size;
     this.head = body;
-    this.eye = eye;
-    this.whiskers = whiskers;
   }
 
   public TankPic(PApplet app, float size) {
-    this(app, size, color(255, 169, 19), color(100, 100, 200), color(0));
+    this(app, size, color(255, 169, 19));
   }
 
 
