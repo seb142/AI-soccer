@@ -10,42 +10,18 @@ import game2dai.graph.*;
 
 World world;
 StopWatch sw;
-TankOne t1t1 = new TankOne(new Vector2D(100,100), // position
-  20, // collision radius
-  Vector2D.ZERO, // velocity
-  70, // maximum speed
-  Vector2D.random(null), // heading
-  1.5, // mass
-  2.5f, // turning rate
-  2500);
-TankOne t1t2 = new TankOne(new Vector2D(50,50), // position
-  20, // collision radius
-  Vector2D.ZERO, // velocity
-  70, // maximum speed
-  Vector2D.random(null), // heading
-  1.5, // mass
-  2.5f, // turning rate
-  2500);
+TankOne t1t1;
+TankOne t1t2;
+TankPic tankPic;
 
-
-
-boolean running = true;
 
 void setup() {
   size(800, 600);
+  Domain domain = new Domain(0, 0, 800, 600);
+  t1t1 = createTank(domain);
+  t1t2 = createTank(domain);
   world = new World(800, 600);
   sw = new StopWatch();
-  t1t1.AP().wanderOn().wanderFactors(60, 30, 20);
-  t1t2.AP().wanderOn().wanderFactors(60, 30, 20);
-  TankPic view = new TankPic(this, (float)50);
-  TankPic view2 = new TankPic(this, (float)50);
-
-  t1t1.renderer(view);
-  t1t2.renderer(view);
-  Domain d = new Domain(0, 0, 800, 600);
-  t1t1.worldDomain(d, SBF.WRAP);
-  t1t2.worldDomain(d, SBF.WRAP);
-
   world.add(t1t1);
   world.add(t1t2);
   sw.reset();
@@ -57,6 +33,21 @@ void draw(){
   world.update(elapsedTime);
   background(255);
   world.draw(elapsedTime);
+}
 
+public TankOne createTank(Domain domain){
+  TankOne tank = new TankOne(new Vector2D(100,100), // position
+  20, // collision radius
+  Vector2D.ZERO, // velocity
+  70, // maximum speed
+  Vector2D.random(null), // heading
+  1.5, // mass
+  2.5f, // turning rate
+  2500);
+  tank.AP().wanderOn().wanderFactors(60, 30, 20);
+  tankPic = new TankPic(this, (float)50);
+  tank.worldDomain(domain, SBF.WRAP);
+  tank.renderer(tankPic);
+  return tank;
 
 }
