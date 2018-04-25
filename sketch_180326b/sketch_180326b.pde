@@ -18,7 +18,7 @@ TankOne t1t1 = new TankOne(new Vector2D(100,100), // position
   1.5, // mass
   2.5f, // turning rate
   2500);
-TankOne t1t2 = new TankOne(new Vector2D(100,100), // position
+TankOne t1t2 = new TankOne(new Vector2D(50,50), // position
   20, // collision radius
   Vector2D.ZERO, // velocity
   70, // maximum speed

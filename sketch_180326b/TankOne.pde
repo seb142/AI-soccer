@@ -39,10 +39,7 @@ public class TankOne extends Vehicle{
     
   }
   
-  void checkCollision(TankTwo other){
-
-  }
-  
+ 
 
   
   public void drawTank(){
