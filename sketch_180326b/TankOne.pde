@@ -24,11 +24,15 @@ public class TankOne extends Vehicle{
 
   }
 
-  public void moveBackward(){
-
-
+  public void lookForTank() {
+    for (int i = 0; i < tanks.size(); i++) {
+      if (canSee(world, tanks.get(i).pos())) {
+        System.out.println("HITTAD");
+      }
+    }
+    
   }
-
+  
   public void rotateCounterClock(){
 
     

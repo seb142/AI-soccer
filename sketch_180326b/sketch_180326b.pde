@@ -7,6 +7,7 @@ import game2dai.fsm.*;
 import game2dai.steering.*;
 import game2dai.utils.*;
 import game2dai.graph.*;
+import java.util.*;
 
 World world;
 StopWatch sw;
@@ -16,6 +17,8 @@ TankOne t1t3;
 TankOne t1t4;
 TankOne t1t5;
 TankOne t1t6;
+ArrayList <TankOne> tanks = new ArrayList<TankOne>();
+
 TankPic tankPic;
 
 void setup() {
@@ -63,6 +66,7 @@ public TankOne createTank(Domain domain,int xPos,int yPos, Boolean movement){
   if(movement){
     tank.AP().wanderOn().wanderFactors(60, 30, 20);
   }
+  tanks.add(tank);
   tankPic = new TankPic(this, (float)50);
   tank.worldDomain(domain, SBF.WRAP);
   tank.viewFactors(260, PApplet.TWO_PI/7);
