@@ -86,10 +86,9 @@ public class TankPic extends PicturePS {
   float velY, float headX, float headY, float etime) {
 
     // Draw and hints that are specified and relevant
-    if (hints != 0) {
-      Hints.hintFlags = hints;
-      Hints.draw(app, user, velX, velY, headX, headY);
-    }
+    
+    Hints.hintFlags = hints;
+    Hints.draw(app, user, velX, velY, headX, headY);
     // Determine the angle the tank is heading
     float angle = PApplet.atan2(headY, headX);
 

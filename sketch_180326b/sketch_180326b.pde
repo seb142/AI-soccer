@@ -29,6 +29,11 @@ void setup() {
   t1t6 = createTank(domain,700,530,false);
   world = new World(800, 600);
   sw = new StopWatch();
+  int selectedHint = -1;
+  selectedHint = Hints.HINT_VIEW;
+  t1t1.renderer().showHints(selectedHint);
+
+  
   world.add(t1t1);
   world.add(t1t2);
   world.add(t1t3);
@@ -60,6 +65,7 @@ public TankOne createTank(Domain domain,int xPos,int yPos, Boolean movement){
   }
   tankPic = new TankPic(this, (float)50);
   tank.worldDomain(domain, SBF.WRAP);
+  tank.viewFactors(260, PApplet.TWO_PI/7);
   tank.renderer(tankPic);
   return tank;
 }
