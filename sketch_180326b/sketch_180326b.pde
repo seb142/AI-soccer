@@ -48,6 +48,7 @@ void setup() {
 }
 
 void draw(){
+  t1t1.lookForTank();
   double elapsedTime = sw.getElapsedTime();
   world.update(elapsedTime);
   background(255);

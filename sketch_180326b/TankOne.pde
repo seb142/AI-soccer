@@ -26,8 +26,10 @@ public class TankOne extends Vehicle{
 
   public void lookForTank() {
     for (int i = 0; i < tanks.size(); i++) {
-      if (canSee(world, tanks.get(i).pos())) {
+      if (canSee(world, tanks.get(i).pos()) && tanks.get(i) != this) {
         System.out.println("HITTAD");
+      }else{
+       System.out.println("INTE HITTAD"); 
       }
     }
     
@@ -88,7 +90,6 @@ public class TankPic extends PicturePS {
 
   public void draw(BaseEntity user, float posX, float posY, float velX, 
   float velY, float headX, float headY, float etime) {
-
     // Draw and hints that are specified and relevant
     
     Hints.hintFlags = hints;
