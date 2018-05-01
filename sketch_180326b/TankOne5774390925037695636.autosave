@@ -4,7 +4,6 @@ public class TankOne extends Vehicle{
   Vector2D position;
   Vector2D velocity;
   Vector2D heading;
-  Vector2D lastKnownPos = new Vector2D();
   PVector acceleration;
   boolean collision;
   Turret turret;
@@ -16,7 +15,8 @@ public class TankOne extends Vehicle{
     max_force);
     this.radius = 20;
     this.position = position;
-    this.health = 3;
+    
+
   }
 
   public void moveForward(){
@@ -24,19 +24,11 @@ public class TankOne extends Vehicle{
 
   }
 
-  public void lookForTank() {
-    for (int i = 0; i < tanks.size(); i++) {
-      if (canSee(world, tanks.get(i).pos()) && tanks.get(i) != this) {
-        System.out.println("HITTAD");
-      }else{
-       System.out.println("INTE HITTAD"); 
-      }
-    }
-    
+  public void moveBackward(){
+
+
   }
-  
- 
-  
+
   public void rotateCounterClock(){
 
     
@@ -47,8 +39,6 @@ public class TankOne extends Vehicle{
     
   }
   
- 
-
   
   public void drawTank(){
     fill(128, 204, 255);
@@ -63,11 +53,9 @@ public class TankOne extends Vehicle{
     keyPressed();
   }
   
-  
-  
   void display() {
     drawTank();
-
+    turret = new Turret((float)position.x, (float)position.y, 30);
     turret.run();
   }
 
@@ -75,31 +63,31 @@ public class TankOne extends Vehicle{
 
 
 public class TankPic extends PicturePS {
-  Turret turret;
-  int head;
-  float size;
-  int health;
 
-  public TankPic(PApplet app, float size, int body) {
+  int head, eye, whiskers;
+  float size;
+
+  public TankPic(PApplet app, float size, int body, int eye, int whiskers) {
     super(app);
     this.size = size;
     this.head = body;
-    this.health = 3;
+    this.eye = eye;
+    this.whiskers = whiskers;
   }
 
   public TankPic(PApplet app, float size) {
-    this(app, size, color(255, 169, 19));
-    this.health = 3;
+    this(app, size, color(255, 169, 19), color(100, 100, 200), color(0));
   }
 
 
   public void draw(BaseEntity user, float posX, float posY, float velX, 
   float velY, float headX, float headY, float etime) {
+
     // Draw and hints that are specified and relevant
-    
-    Hints.hintFlags = hints;
-    Hints.draw(app, user, velX, velY, headX, headY);
-    
+    if (hints != 0) {
+      Hints.hintFlags = hints;
+      Hints.draw(app, user, velX, velY, headX, headY);
+    }
     // Determine the angle the tank is heading
     float angle = PApplet.atan2(headY, headX);
 
@@ -110,13 +98,9 @@ public class TankPic extends PicturePS {
     rotate(angle);
 
     // Draw the entity  
-    fill((((255/6) * health) * 40), 50, 50, 255 - health*60);
-    ellipse(0,0, 50, 50);
-    strokeWeight(2);
-    line(0, 0, 25, 0);
-    
-    turret = new Turret(0, 0, 20, 25);
-    turret.display();
+
+    ellipse(0, 0, 0.7f*size, 0.7f*size);
+
 
     // Finished drawing
     popMatrix();
