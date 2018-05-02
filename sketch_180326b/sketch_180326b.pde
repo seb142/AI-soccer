@@ -35,6 +35,8 @@ int[] obs = new int[] {
 TankPic tankPic;
 
 void setup() {
+  Graph g = new Graph();
+  g.createGraph();
   size(800, 800);
   Domain domain = new Domain(0, 0, 800, 800);
   t1t1 = createTank(domain,100,70,true);
