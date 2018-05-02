@@ -20,6 +20,8 @@ TankOne t1t3;
 TankOne t1t4;
 TankOne t1t5;
 TankOne t1t6;
+Team teamA;
+Team teamB;
 ArrayList <TankOne> tanks = new ArrayList<TankOne>();
 ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
 
@@ -28,13 +30,15 @@ BitmapPic obstaclePic;
 
 void setup() {
   size(800, 800);
+  teamA = new Team("teamA");
+  teamB = new Team("teamB");
   Domain domain = new Domain(0, 0, 800, 800);
-  t1t1 = createTank(domain,40, 50,true);
-  t1t2 = createTank(domain,40, 150,false);
-  t1t3 = createTank(domain,40, 250,false);
-  t1t4 = createTank(domain,760, height-50,false);
-  t1t5 = createTank(domain,760, height-150,false);
-  t1t6 = createTank(domain,760, height-250,false);
+  t1t1 = createTank(domain,40, 50,true, teamA);
+  t1t2 = createTank(domain,40, 150,false, teamA);
+  t1t3 = createTank(domain,40, 250,false, teamA);
+  t1t4 = createTank(domain,760, height-50,false, teamB);
+  t1t5 = createTank(domain,760, height-150,false, teamB);
+  t1t6 = createTank(domain,760, height-250,false, teamB);
   ob1 = createObstacle(domain, 230, 600);
   ob2 = createObstacle(domain, 280, 220);
   ob3 = createObstacle(domain, 530, 520);
@@ -67,7 +71,7 @@ void draw(){
   world.draw(elapsedTime);
 }
 
-public TankOne createTank(Domain domain,int xPos,int yPos, Boolean movement){
+public TankOne createTank(Domain domain,int xPos,int yPos, Boolean movement, Team team){
   TankOne tank = new TankOne(new Vector2D(xPos,yPos), // position
   25, // collision radius
   Vector2D.ZERO, // velocity
@@ -75,14 +79,15 @@ public TankOne createTank(Domain domain,int xPos,int yPos, Boolean movement){
   Vector2D.random(null), // heading
   1.5, // mass
   2.5f, // turning rate
-  2500);
+  2500,
+  team);
   if(movement){
     tank.AP().obstacleAvoidOn().wanderOn();
     tank.AP().wanderOn().wanderFactors(60, 30, 20);
     tank.AP().obstacleAvoidDetectBoxLength(15);
   }
   tanks.add(tank);
-  tankPic = new TankPic(this, (float)50);
+  tankPic = new TankPic(this, (float)50, team);
   tank.worldDomain(domain, SBF.REBOUND);
   tank.viewFactors(260, PApplet.TWO_PI/7);
   tank.renderer(tankPic);

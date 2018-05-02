@@ -12,12 +12,13 @@ public class TankOne extends Vehicle{
 
   public TankOne(Vector2D position, double radius, Vector2D velocity, 
   double max_speed, Vector2D heading, double mass, 
-  double max_turn_rate, double max_force){
+  double max_turn_rate, double max_force, Team team){
     super(position, radius, velocity, max_speed, heading, mass, max_turn_rate, 
     max_force);
     this.radius = 20;
     this.position = position;
     this.health = 3;
+    this.team = team;
   }
 
   public void moveForward(){
@@ -77,19 +78,21 @@ public class TankOne extends Vehicle{
 
 public class TankPic extends PicturePS {
   Turret turret;
+  Team team;
   int head;
   float size;
   int health;
 
-  public TankPic(PApplet app, float size, int body) {
+  public TankPic(PApplet app, float size, int body, Team team) {
     super(app);
     this.size = size;
     this.head = body;
     this.health = 3;
+    this.team = team;
   }
 
-  public TankPic(PApplet app, float size) {
-    this(app, size, color(255, 169, 19));
+  public TankPic(PApplet app, float size, Team team) {
+    this(app, size, color(255, 169, 19), team);
     this.health = 3;
   }
 
@@ -111,7 +114,8 @@ public class TankPic extends PicturePS {
     rotate(angle);
 
     // Draw the entity  
-    fill((((255/6) * health) * 40), 50, 50, 255 - health*60);
+    System.out.println(team.getTeamName());
+    fill((team.getTeamColor() * health * 40), 50, 50, 255 - health*60);
     ellipse(0,0, 50, 50);
     strokeWeight(2);
     line(0, 0, 25, 0);

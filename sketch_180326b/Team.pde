@@ -1,20 +1,23 @@
 public class Team{
   String teamName;
-  color teamColor;
+  int teamColor;
 
   ArrayList<TankOne> messages = new ArrayList<TankOne>();
 
-  public Team(){
-
+  public Team(String teamName){
+    this.teamName = teamName;
   }
   
-  public void getTeamName(){
-    
+  public String getTeamName(){
+    return teamName;
   }
   
-  public void getTeamColor(){
-  
+  public int getTeamColor(){
+    if(teamName.equals("teamA")){
+      teamColor = 42;
+    }else{
+      teamColor = 2;
+    }
+    return teamColor;
   }
-
-
 }
