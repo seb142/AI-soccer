@@ -23,29 +23,18 @@ TankOne t1t6;
 ArrayList <TankOne> tanks = new ArrayList<TankOne>();
 ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
 
-int[] obs = new int[] {
-  100, 100, 36, 
-  200, 200, 32, 
-  270, 70, 16, 
-  380, 180, 37, 
-  510, 110, 27, 
-  520, 210, 23, 
-  400, 80, 10, 
-  90, 240, 6
-};
-
 TankPic tankPic;
 BitmapPic obstaclePic;
 
 void setup() {
   size(800, 800);
   Domain domain = new Domain(0, 0, 800, 800);
-  t1t1 = createTank(domain,100,70,true);
-  t1t2 = createTank(domain,200,70,false);
-  t1t3 = createTank(domain,300,70,false);
-  t1t4 = createTank(domain,500,530,false);
-  t1t5 = createTank(domain,600,530,false);
-  t1t6 = createTank(domain,700,530,false);
+  t1t1 = createTank(domain,40, 50,true);
+  t1t2 = createTank(domain,40, 150,false);
+  t1t3 = createTank(domain,40, 250,false);
+  t1t4 = createTank(domain,760, height-50,false);
+  t1t5 = createTank(domain,760, height-150,false);
+  t1t6 = createTank(domain,760, height-250,false);
   ob1 = createObstacle(domain, 230, 600);
   ob2 = createObstacle(domain, 280, 220);
   ob3 = createObstacle(domain, 530, 520);
