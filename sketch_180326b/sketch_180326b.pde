@@ -22,6 +22,7 @@ TankOne t1t5;
 TankOne t1t6;
 ArrayList <TankOne> tanks = new ArrayList<TankOne>();
 ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
+
 int[] obs = new int[] {
   100, 100, 36, 
   200, 200, 32, 
@@ -32,7 +33,9 @@ int[] obs = new int[] {
   400, 80, 10, 
   90, 240, 6
 };
+
 TankPic tankPic;
+BitmapPic obstaclePic;
 
 void setup() {
   size(800, 800);
@@ -43,9 +46,11 @@ void setup() {
   t1t4 = createTank(domain,500,530,false);
   t1t5 = createTank(domain,600,530,false);
   t1t6 = createTank(domain,700,530,false);
+  ob1 = createObstacle(domain, 230, 600);
+  ob2 = createObstacle(domain, 280, 220);
+  ob3 = createObstacle(domain, 530, 520);
   
-  
-  world = new World(800, 600);
+  world = new World(800, 800);
   sw = new StopWatch();
   int selectedHint = -1;
   selectedHint = Hints.HINT_VIEW;
@@ -57,15 +62,14 @@ void setup() {
   world.add(t1t4);
   world.add(t1t5);
   world.add(t1t6);
+  world.add(ob1);
+  world.add(ob2);
+  world.add(ob3);
   sw.reset();
 
 }
 
 void draw(){
-  
-  for(int i = 0; i < obstacles.size(); i++){
-    obstacles.get(i).display();
-  }
   
   t1t1.lookForTank();
   double elapsedTime = sw.getElapsedTime();
@@ -84,23 +88,25 @@ public TankOne createTank(Domain domain,int xPos,int yPos, Boolean movement){
   2.5f, // turning rate
   2500);
   if(movement){
+    tank.AP().obstacleAvoidOn().wanderOn();
     tank.AP().wanderOn().wanderFactors(60, 30, 20);
+    tank.AP().obstacleAvoidDetectBoxLength(15);
   }
   tanks.add(tank);
   tankPic = new TankPic(this, (float)50);
-  tank.worldDomain(domain, SBF.WRAP);
+  tank.worldDomain(domain, SBF.REBOUND);
   tank.viewFactors(260, PApplet.TWO_PI/7);
   tank.renderer(tankPic);
   return tank;
 }
 
-//public Obstacle createObstacle(Domain domain,int xPos,int yPos) {
-//  Obstacle ob = new Obstacle(new Vector2D(xPos, yPos));
-//  obstacles.add(ob);
-//  ObstaclePic obPic;
-//  obPic = new ObstaclePic(this);
-//  ob.worldDomain(domain, SBF.WRAP);
-//  ob.viewFactors(260, PApplet.TWO_PI/7);
-//  ob.renderer(obPic);
-//  return ob;
-//}
+
+  
+public Obstacle createObstacle(Domain domain,int xPos,int yPos) {
+  Obstacle ob = new Obstacle(new Vector2D(xPos, yPos), 100);
+  obstaclePic = new BitmapPic(this, "data/tree01_v2.png");
+  obstacles.add(ob);
+  //obPic = new ObstaclePic(this);
+  ob.renderer(obstaclePic);
+  return ob;
+}
