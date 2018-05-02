@@ -1,17 +1,20 @@
 public class Team{
-  TankOne tank1;
+  String teamName;
+  color teamColor;
 
+  ArrayList<TankOne> messages = new ArrayList<TankOne>();
 
-  public Team(TankOne t1){
-    TankOne tank1 = t1;
+  public Team(){
 
   }
-
-  public TankOne getTank1(){
-
-    return tank1;
+  
+  public void getTeamName(){
+    
   }
-
+  
+  public void getTeamColor(){
+  
+  }
 
 
 }
