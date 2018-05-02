@@ -126,6 +126,7 @@ public class TankPic extends PicturePS {
     
     turret = new Turret(0, 0, 20, 25);
     turret.display();
+    
 
     // Finished drawing
     popMatrix();

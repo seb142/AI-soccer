@@ -49,6 +49,7 @@ void setup() {
   selectedHint = Hints.HINT_VIEW;
   t1t1.renderer().showHints(selectedHint);
   
+  
   world.add(t1t1);
   world.add(t1t2);
   world.add(t1t3);
@@ -62,13 +63,28 @@ void setup() {
 
 }
 
+  void displayHomeBaseTeam1() {
+  strokeWeight(1);
+  fill(204, 50, 50, 15);
+  rect(0, 0, 150, 350);
+}
+
+void displayHomeBaseTeam2() {
+  strokeWeight(1);
+  fill(0, 150, 200, 15);
+  rect(width - 151, height - 351, 150, 350);
+}
+
 void draw(){
   
   t1t1.lookForTank();
   double elapsedTime = sw.getElapsedTime();
   world.update(elapsedTime);
   background(255);
+  displayHomeBaseTeam1(); 
+  displayHomeBaseTeam2();
   world.draw(elapsedTime);
+  
 }
 
 public TankOne createTank(Domain domain,int xPos,int yPos, Boolean movement, Team team){
@@ -93,8 +109,6 @@ public TankOne createTank(Domain domain,int xPos,int yPos, Boolean movement, Tea
   tank.renderer(tankPic);
   return tank;
 }
-
-
   
 public Obstacle createObstacle(Domain domain,int xPos,int yPos) {
   Obstacle ob = new Obstacle(new Vector2D(xPos, yPos), 100);
