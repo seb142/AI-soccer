@@ -8,6 +8,7 @@ public class TankOne extends Vehicle{
   PVector acceleration;
   boolean collision;
   Turret turret;
+  Team team;
 
   public TankOne(Vector2D position, double radius, Vector2D velocity, 
   double max_speed, Vector2D heading, double mass, 
