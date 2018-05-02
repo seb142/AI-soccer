@@ -115,7 +115,11 @@ public class TankPic extends PicturePS {
 
     // Draw the entity  
     System.out.println(team.getTeamName());
-    fill((team.getTeamColor() * health * 40), 50, 50, 255 - health*60);
+    if(team.getTeamName() == "teamA"){
+      fill((((255/6) * health) * 40), 50, 50, 255 - health*60);
+    }else if(team.getTeamName() == "teamB"){
+      fill(0, 0, ((255/6) * health) * 40, 255 - health*60);
+    }
     ellipse(0,0, 50, 50);
     strokeWeight(2);
     line(0, 0, 25, 0);

@@ -11,13 +11,5 @@ public class Team{
   public String getTeamName(){
     return teamName;
   }
-  
-  public int getTeamColor(){
-    if(teamName.equals("teamA")){
-      teamColor = 42;
-    }else{
-      teamColor = 2;
-    }
-    return teamColor;
-  }
+
 }
