@@ -15,7 +15,7 @@ public class Shell{
   }
   
   public void drawShell(){
-    fill(0,0,0,0);
+    fill(255);
     ellipse(position.x, position.y, 15, 15);
   }
 

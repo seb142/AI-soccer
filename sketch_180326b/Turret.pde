@@ -17,7 +17,8 @@ public class Turret {
   
   public void drawTurret(){
     strokeWeight(1);
-    fill(204, 50, 50);
+    //fill(204, 50, 50);
+    fill(0);
     ellipse(xPos,yPos,25,25);
     strokeWeight(2);
     line(0, 0, this.cannon_length, 0);
