@@ -2,16 +2,33 @@ HashMap hm = new HashMap();
 
 
 public void createGraph(){
-  
-  for(int x = 0; x< 800; x += 100){
-   
+
+  for(int x = 10; x < 800; x += 100){
+      //System.out.println("test");
+
     for(int y = 10; y < 800; y += 100){
     
-     if(x == 10 && y == 10){
-         System.out.println(x+" "+y);
-     }else if(x == 10){
-       System.out.println(x+" "+y);
-     }
+     if(y == 10){
+        hm.put(new CordinateKey(x,y), new Node(x,y));
+     }else{
+       hm.put(new CordinateKey(x,y), new Node(x,y));
+       if(hm.get(new CordinateKey(x,y-100)) !=null){
+        Node ovan = (Node)hm.get(new CordinateKey(x,y-100));
+        Node nuvarande = (Node)hm.get(new CordinateKey(x,y));
+        nuvarande.setNorthNode(ovan);
+        hm.put(new CordinateKey(x,y), new Node(x,y));
+        System.out.println("ovan: "+ ovan);
+        System.out.println(nuvarande.northNode);
+        System.out.println("-----------------");
+       }
+       if(y != 10){
+         Node bakom = (Node)hm.get(new CordinateKey(x,y-100));
+         Node nuvarande = (Node)hm.get(new CordinateKey(x,y));
+         System.out.println("bakom: "+ bakom);
+         System.out.println(nuvarande.northNode);
+         System.out.println("-----------------");
+       }
+     } 
       
     }    
   }
@@ -35,6 +52,18 @@ public class Node {
       this.x = x;
       this.y = y;
     }
+    public void setNorthNode(Node nNode){
+      this.northNode = nNode;
+    }
+    public void setEastNode(Node eNode){
+      this.eastNode = eNode;
+    }
+    public void setSouthNode(Node sNode){
+      this.southNode = sNode;
+    }
+    public void setWestNode(Node wNode){
+      this.westNode = wNode;
+    }
     
     public void addNodes(Node newNorth, Node newEast, Node newSouth, Node newWest ){
       northNode =  newNorth;
@@ -44,6 +73,10 @@ public class Node {
 
       
       
+    }
+    
+    public String toString(){
+     return "tostring x:"+x + " y: " + y; 
     }
 }
 
