@@ -34,21 +34,14 @@ void setup() {
   teamA = new Team("teamA");
   teamB = new Team("teamB");
   Domain domain = new Domain(0, 0, 800, 800);
-<<<<<<< HEAD
-  t1t1 = createTank(domain,40, 50,true);
-  t1t2 = createTank(domain,40, 150,false);
-  t1t3 = createTank(domain,40, 250,false);
-  t1t4 = createTank(domain,760, height-50,false);
-  t1t5 = createTank(domain,760, height-150,false);
-  t1t6 = createTank(domain,760, height-250,false);
-=======
+
   t1t1 = createTank(domain,40, 50,true, teamA);
   t1t2 = createTank(domain,40, 150,false, teamA);
   t1t3 = createTank(domain,40, 250,false, teamA);
   t1t4 = createTank(domain,760, height-50,false, teamB);
   t1t5 = createTank(domain,760, height-150,false, teamB);
   t1t6 = createTank(domain,760, height-250,false, teamB);
->>>>>>> 5cea82866d3b32c525a5e42ddc278cf05230074c
+
   ob1 = createObstacle(domain, 230, 600);
   ob2 = createObstacle(domain, 280, 220);
   ob3 = createObstacle(domain, 530, 520);
@@ -113,21 +106,14 @@ public TankOne createTank(Domain domain,int xPos,int yPos, Boolean movement, Tea
     tank.AP().obstacleAvoidDetectBoxLength(15);
   }
   tanks.add(tank);
-<<<<<<< HEAD
-  tankPic = new TankPic(this, (float)50);
-=======
+
   tankPic = new TankPic(this, (float)50, team);
->>>>>>> 5cea82866d3b32c525a5e42ddc278cf05230074c
+
   tank.worldDomain(domain, SBF.REBOUND);
   tank.viewFactors(260, PApplet.TWO_PI/7);
   tank.renderer(tankPic);
   return tank;
 }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 5cea82866d3b32c525a5e42ddc278cf05230074c
   
 public Obstacle createObstacle(Domain domain,int xPos,int yPos) {
   Obstacle ob = new Obstacle(new Vector2D(xPos, yPos), 100);
