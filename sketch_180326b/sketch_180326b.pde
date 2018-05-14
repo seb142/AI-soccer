@@ -35,14 +35,14 @@ void setup() {
   teamB = new Team("teamB");
   Domain domain = new Domain(0, 0, 800, 800);
 
-  t1t1 = createTank(domain,40, 50,true, teamA);
+  t1t1 = createTank(domain,700, 700,true, teamA);
   t1t2 = createTank(domain,40, 150,false, teamA);
   t1t3 = createTank(domain,40, 250,false, teamA);
   t1t4 = createTank(domain,760, height-50,false, teamB);
   t1t5 = createTank(domain,760, height-150,false, teamB);
   t1t6 = createTank(domain,760, height-250,false, teamB);
 
-  ob1 = createObstacle(domain, 230, 600);
+  //ob1 = createObstacle(domain, 230, 600);
   ob2 = createObstacle(domain, 280, 220);
   ob3 = createObstacle(domain, 530, 520);
   

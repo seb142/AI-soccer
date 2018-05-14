@@ -9,7 +9,8 @@ public class TankOne extends Vehicle{
   boolean collision;
   Turret turret;
   Team team;
-
+  bool
+  
   public TankOne(Vector2D position, double radius, Vector2D velocity, 
   double max_speed, Vector2D heading, double mass, 
   double max_turn_rate, double max_force, Team team){
@@ -31,6 +32,7 @@ public class TankOne extends Vehicle{
       if (canSee(world, tanks.get(i).pos()) && tanks.get(i) != this  && tanks.get(i).team.teamName == "teamB") {
         System.out.println(tanks.get(i).team.getTeamName());
         findPathHome(this);
+        team.addtank(tanks.get(i));
         
       }else{
        //System.out.println("INTE HITTAD"); 
@@ -38,45 +40,15 @@ public class TankOne extends Vehicle{
     }
     
   }
-  
- 
-  
+    
   public void rotateCounterClock(){
-
     
   }
 
   public void rotateClock(){
-
     
   }
-  
- 
-
-  
-  public void drawTank(){
-    fill(128, 204, 255);
-    ellipse((float)position.x,(float)position.y,50,50);
-    strokeWeight(2);
-    line((float)position.x, (float)position.y, (float)position.x, (float)position.y+25);
-    strokeWeight(1);
-  }
-  
-  void run(){
-    display();
-    keyPressed();
-  }
-  
-  
-  
-  void display() {
-    drawTank();
-
-    turret.run();
-  }
-
 }
-
 
 public class TankPic extends PicturePS {
   Turret turret;
@@ -98,14 +70,14 @@ public class TankPic extends PicturePS {
     this.health = 3;
   }
 
-
   public void draw(BaseEntity user, float posX, float posY, float velX, 
   float velY, float headX, float headY, float etime) {
     // Draw and hints that are specified and relevant
     
     Hints.hintFlags = hints;
     Hints.draw(app, user, velX, velY, headX, headY);
-    
+    System.out.println("x: " + (float)posX + "y: " + (float)posY);
+
     // Determine the angle the tank is heading
     float angle = PApplet.atan2(headY, headX);
 
@@ -128,8 +100,7 @@ public class TankPic extends PicturePS {
     
     turret = new Turret(0, 0, 20, 25);
     turret.display();
-    
-
+ 
     // Finished drawing
     popMatrix();
     popStyle();
