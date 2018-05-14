@@ -9,7 +9,8 @@ public class TankOne extends Vehicle{
   boolean collision;
   Turret turret;
   Team team;
-  bool
+  boolean patroling = true;
+  boolean retreating = false;
   
   public TankOne(Vector2D position, double radius, Vector2D velocity, 
   double max_speed, Vector2D heading, double mass, 
@@ -26,14 +27,33 @@ public class TankOne extends Vehicle{
     position.add(velocity);
 
   }
-
+  
+  public void run(){
+    System.out.println("PRINT FRÅN RUN X:" + position.x+"Y:" + position.y);
+    if(patroling){
+      lookForTank(); 
+    }else if(retreating){
+      System.out.println("RETREATING");
+     if(position.x < 100 && position.y < 100){
+      System.out.println("PRINT FRÅN RUN X:" + position.x+"Y:" + position.y);
+       patroling = true;
+       retreating = false;
+       this.AP().obstacleAvoidOn().wanderOn();
+       this.AP().wanderOn().wanderFactors(60, 30, 20);
+    }
+  }
+  }
+  
+  
   public void lookForTank() {
     for (int i = 0; i < tanks.size(); i++) {
       if (canSee(world, tanks.get(i).pos()) && tanks.get(i) != this  && tanks.get(i).team.teamName == "teamB") {
         System.out.println(tanks.get(i).team.getTeamName());
         findPathHome(this);
         team.addtank(tanks.get(i));
-        
+        this.AP().wanderOff();
+        patroling = false;
+        retreating = true;
       }else{
        //System.out.println("INTE HITTAD"); 
       }

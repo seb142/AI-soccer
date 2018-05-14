@@ -80,7 +80,7 @@ void displayHomeBaseTeam2() {
 
 void draw(){
   
-  t1t1.lookForTank();
+  t1t1.run();
   double elapsedTime = sw.getElapsedTime();
   world.update(elapsedTime);
   background(255);
