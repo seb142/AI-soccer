@@ -11,16 +11,18 @@ public class TankOne extends Vehicle{
   Team team;
   boolean patroling = true;
   boolean retreating = false;
+  TankPic tankPic;
   
   public TankOne(Vector2D position, double radius, Vector2D velocity, 
   double max_speed, Vector2D heading, double mass, 
-  double max_turn_rate, double max_force, Team team){
+  double max_turn_rate, double max_force, Team team, TankPic tankPic){
     super(position, radius, velocity, max_speed, heading, mass, max_turn_rate, 
     max_force);
     this.radius = 20;
     this.position = position;
     this.health = 3;
     this.team = team;
+    this.tankPic = tankPic;
   }
 
   public void moveForward(){
@@ -29,15 +31,29 @@ public class TankOne extends Vehicle{
   }
   
   public void run(){
-    System.out.println("PRINT FRÅN RUN X:" + position.x+"Y:" + position.y);
+    System.out.println();
+    System.out.println("retreating: " + retreating+ " patroling: " +patroling);
+    System.out.println("posX: " + tankPic.posX+ " posY: " +tankPic.posY);
+
     if(patroling){
       lookForTank(); 
+      
     }else if(retreating){
-      System.out.println("RETREATING");
-     if(position.x < 100 && position.y < 100){
-      System.out.println("PRINT FRÅN RUN X:" + position.x+"Y:" + position.y);
+     if(tankPic.posX < 100f && tankPic.posY < 100f){
        patroling = true;
-       retreating = false;
+       retreating = false;      
+       System.out.println("##########################");
+       System.out.println("##########################");
+       System.out.println("##########################");
+       System.out.println("##########################");
+       System.out.println("##########################");
+       System.out.println("##########################");
+       System.out.println("##########################");
+       System.out.println("##########################");
+       System.out.println("##########################");
+       System.out.println("##########################");
+       System.out.println("##########################");
+       System.out.println("##########################");
        this.AP().obstacleAvoidOn().wanderOn();
        this.AP().wanderOn().wanderFactors(60, 30, 20);
     }
@@ -46,16 +62,20 @@ public class TankOne extends Vehicle{
   
   
   public void lookForTank() {
+    System.out.println("look for tank1");
     for (int i = 0; i < tanks.size(); i++) {
       if (canSee(world, tanks.get(i).pos()) && tanks.get(i) != this  && tanks.get(i).team.teamName == "teamB") {
         System.out.println(tanks.get(i).team.getTeamName());
-        findPathHome(this);
-        team.addtank(tanks.get(i));
         this.AP().wanderOff();
+        findPathHome(this);
+        System.out.print("test1");
+        //team.addtank(tanks.get(i));
         patroling = false;
         retreating = true;
+        System.out.println("look for tank2");
       }else{
-       //System.out.println("INTE HITTAD"); 
+         System.out.print("test2");
+       //System.out.println("INTE HITTAD");
       }
     }
     
@@ -76,6 +96,7 @@ public class TankPic extends PicturePS {
   int head;
   float size;
   int health;
+  float posX,posY;
 
   public TankPic(PApplet app, float size, int body, Team team) {
     super(app);
@@ -93,7 +114,8 @@ public class TankPic extends PicturePS {
   public void draw(BaseEntity user, float posX, float posY, float velX, 
   float velY, float headX, float headY, float etime) {
     // Draw and hints that are specified and relevant
-    
+    this.posX = posX;
+    this.posY = posY;
     Hints.hintFlags = hints;
     Hints.draw(app, user, velX, velY, headX, headY);
     System.out.println("x: " + (float)posX + "y: " + (float)posY);
