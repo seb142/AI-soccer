@@ -28,8 +28,10 @@ public class TankOne extends Vehicle{
 
   public void lookForTank() {
     for (int i = 0; i < tanks.size(); i++) {
-      if (canSee(world, tanks.get(i).pos()) && tanks.get(i) != this) {
-        //System.out.println("HITTAD");
+      if (canSee(world, tanks.get(i).pos()) && tanks.get(i) != this  && tanks.get(i).team.teamName == "teamB") {
+        System.out.println(tanks.get(i).team.getTeamName());
+        findPathHome(this);
+        
       }else{
        //System.out.println("INTE HITTAD"); 
       }
@@ -114,7 +116,7 @@ public class TankPic extends PicturePS {
     rotate(angle);
 
     // Draw the entity  
-    System.out.println(team.getTeamName());
+    //System.out.println(team.getTeamName());
     if(team.getTeamName() == "teamA"){
       fill((((255/6) * health) * 40), 50, 50, 255 - health*60);
     }else if(team.getTeamName() == "teamB"){
