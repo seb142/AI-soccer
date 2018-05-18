@@ -1,23 +1,27 @@
-public class Turret{
+public class Turret {
   
-  PVector position;
-  PVector velocity;
+  //Vector2D position;
+  //Vector2D velocity;
+  float xPos;
+  float yPos;
   float radius;
+  int cannon_length;
   Shell shell;
   
-  public Turret(float x, float y, float radius){
-    position = new PVector(x,y);
-      if(y > 400) {
-      velocity = new PVector(0, -1);
-    }else{
-      velocity = new PVector(0, 1);
-    }
+  public Turret(float xPos, float yPos, float radius, int cannon_length){
+    this.xPos = xPos;
+    this.yPos = yPos;
     this.radius = radius;
+    this.cannon_length = cannon_length;
   }
   
   public void drawTurret(){
-    fill(0, 153, 255);
-    ellipse(position.x,position.y,30,30);
+    strokeWeight(1);
+    //fill(204, 50, 50);
+    fill(0);
+    ellipse(xPos,yPos,25,25);
+    strokeWeight(2);
+    line(0, 0, this.cannon_length, 0);
   }
   
   public void run(){
@@ -26,7 +30,7 @@ public class Turret{
   
   public void display(){
     drawTurret();
-    shell = new Shell(position.x, position.y, 15);
+    shell = new Shell(xPos, yPos, 15);
     shell.run();
   }
 }
