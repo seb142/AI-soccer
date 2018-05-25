@@ -12,6 +12,8 @@ public class TankOne extends Vehicle{
   boolean patroling = true;
   boolean retreating = false;
   TankPic tankPic;
+  long startTime;
+  boolean home;
   
   public TankOne(Vector2D position, double radius, Vector2D velocity, 
   double max_speed, Vector2D heading, double mass, 
@@ -31,7 +33,7 @@ public class TankOne extends Vehicle{
   }
   
   public void run(){
-    System.out.println();
+    System.out.println(System.currentTimeMillis() - startTime);
     System.out.println("retreating: " + retreating+ " patroling: " +patroling);
     System.out.println("posX: " + tankPic.posX+ " posY: " +tankPic.posY);
 
@@ -39,21 +41,14 @@ public class TankOne extends Vehicle{
       lookForTank(); 
       
     }else if(retreating){
-     if(tankPic.posX < 100f && tankPic.posY < 100f){
+     if(tankPic.posX < 11f && tankPic.posY < 11f){
+       startTime = System.currentTimeMillis();
+       home = true;
+       
+    }if(System.currentTimeMillis()-startTime > 3000 && retreating && home){
        patroling = true;
+       home = false;
        retreating = false;      
-       System.out.println("##########################");
-       System.out.println("##########################");
-       System.out.println("##########################");
-       System.out.println("##########################");
-       System.out.println("##########################");
-       System.out.println("##########################");
-       System.out.println("##########################");
-       System.out.println("##########################");
-       System.out.println("##########################");
-       System.out.println("##########################");
-       System.out.println("##########################");
-       System.out.println("##########################");
        this.AP().obstacleAvoidOn().wanderOn();
        this.AP().wanderOn().wanderFactors(60, 30, 20);
     }
