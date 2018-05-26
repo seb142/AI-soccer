@@ -14,6 +14,7 @@ public class TankOne extends Vehicle{
   TankPic tankPic;
   long startTime;
   boolean home;
+  ArrayList<TankOne> seenEnemies = new ArrayList<TankOne>();
   
   public TankOne(Vector2D position, double radius, Vector2D velocity, 
   double max_speed, Vector2D heading, double mass, 
@@ -38,12 +39,30 @@ public class TankOne extends Vehicle{
     System.out.println("posX: " + tankPic.posX+ " posY: " +tankPic.posY);
 
     if(patroling){
+     for(TankOne t : team.avoidList){
+       if(position.x == t.position.x && position.y == t.position.y){
+         this.AP().wanderOff();
+         this.AP().fleeFactors(100);
+         this.AP().fleeOff();
+         this.AP().obstacleAvoidOn().wanderOn();
+         this.AP().wanderOn().wanderFactors(60, 30, 20);
+       }
+     }
       lookForTank(); 
       
     }else if(retreating){
      if(tankPic.posX < 11f && tankPic.posY < 11f){
        startTime = System.currentTimeMillis();
        home = true;
+       System.out.println("Home " + home);
+       System.out.println("###############");
+       System.out.println("Report to team");
+       System.out.println("###############");
+       for(TankOne t : seenEnemies){ //Report to team which enemeies the tank have seen
+         System.out.println("Reporting tank " + t);
+         this.team.addTankToAvoidList(t);
+       }
+       //seenEnemies.clear();
        
     }if(System.currentTimeMillis()-startTime > 3000 && retreating && home){
        patroling = true;
@@ -61,16 +80,15 @@ public class TankOne extends Vehicle{
     for (int i = 0; i < tanks.size(); i++) {
       if (canSee(world, tanks.get(i).pos()) && tanks.get(i) != this  && tanks.get(i).team.teamName == "teamB") {
         System.out.println(tanks.get(i).team.getTeamName());
-        this.AP().wanderOff();
-        findPathHome(this);
+        seenEnemies.add(tanks.get(i)); // Add the seen enemy to the tanks own list of enemies
+        this.AP().wanderOff(); // Turn off the tanks wander behaviour
+        findPathHome(this); //Called from Graph class
         System.out.print("test1");
-        //team.addtank(tanks.get(i));
         patroling = false;
         retreating = true;
         System.out.println("look for tank2");
       }else{
-         System.out.print("test2");
-       //System.out.println("INTE HITTAD");
+         System.out.println("INTE HITTAD");
       }
     }
     

@@ -64,7 +64,7 @@ public void createGraph(){
 
 public void findPathHome(TankOne tank){
     GraphNode startNode = graph.getNodeNear (tank.position.x, tank.position.y, 500);
-    GraphNode endNode = graph.getNodeNear (10, 10, 700);
+    GraphNode endNode = graph.getNodeNear (40, 40, 700);
     System.out.println(tank.position.x +" " +tank.position.y);
   if (startNode != null && endNode!= null && startNode != endNode) {
       tank.AP().pathSetRoute(pf.search(startNode.id(), endNode.id()));
