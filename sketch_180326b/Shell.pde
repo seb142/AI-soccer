@@ -8,14 +8,9 @@ public class Shell{
     velocity = new PVector(0,0);
     this.radius = radius;
   }
-
-  public void movement(){
-
-  
-  }
   
   public void drawShell(){
-    fill(255);
+    fill(0);
     ellipse(position.x, position.y, 15, 15);
   }
 

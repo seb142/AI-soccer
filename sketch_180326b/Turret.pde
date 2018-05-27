@@ -15,14 +15,10 @@ public class Turret {
   
   public void drawTurret(){
     strokeWeight(1);
-    fill(0);
+    fill(255);
     ellipse(xPos,yPos,25,25);
     strokeWeight(2);
     line(0, 0, this.cannon_length, 0);
-  }
-  
-  public void run(){
-    display();
   }
   
   public void display(){

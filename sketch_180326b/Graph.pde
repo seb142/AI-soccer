@@ -2,12 +2,9 @@ import game2dai.graph.*;
 
 public Graph graph;
 GraphNode node;
-
 GraphEdge[] edges;
 GraphNode[] nodes;
 IGraphSearch pf;
-
-
 
 public void createGraph(){
   graph = new Graph();
@@ -19,9 +16,7 @@ public void createGraph(){
         graph.addNode(node);
         id++;
      } 
-      
     }
-    
     for(double x = 10; x < 800; x += 100){
         
     for(double y = 10; y < 800; y += 100){
@@ -53,10 +48,7 @@ public void createGraph(){
 
       }
       System.out.println("-----------------");
-
-
      }
-      
     }
     pf = new GraphSearch_Astar(graph, new AshCrowFlight());
   
@@ -68,7 +60,5 @@ public void findPathHome(TankOne tank){
     System.out.println(tank.position.x +" " +tank.position.y);
   if (startNode != null && endNode!= null && startNode != endNode) {
       tank.AP().pathSetRoute(pf.search(startNode.id(), endNode.id()));
-      System.out.println("janne");
   }
-  
 }

@@ -42,16 +42,15 @@ void setup() {
   t1t5 = createTank(domain,760, height-150,false, teamB);
   t1t6 = createTank(domain,760, height-250,false, teamB);
 
-  //ob1 = createObstacle(domain, 230, 600);
-  ob2 = createObstacle(domain, 280, 220);
-  ob3 = createObstacle(domain, 530, 520);
+  //ob1 = createObstacle(230, 600);
+  ob2 = createObstacle(280, 220);
+  ob3 = createObstacle(530, 520);
   
   world = new World(800, 800);
   sw = new StopWatch();
   int selectedHint = -1;
   selectedHint = Hints.HINT_VIEW;
   t1t1.renderer().showHints(selectedHint);
-  
   
   world.add(t1t1);
   world.add(t1t2);
@@ -79,7 +78,6 @@ void displayHomeBaseTeam2() {
 }
 
 void draw(){
-  
   t1t1.run();
   double elapsedTime = sw.getElapsedTime();
   world.update(elapsedTime);
@@ -108,18 +106,16 @@ public TankOne createTank(Domain domain,int xPos,int yPos, Boolean movement, Tea
     tank.AP().obstacleAvoidDetectBoxLength(15);
   }
   tanks.add(tank);
-
   tank.worldDomain(domain, SBF.REBOUND);
   tank.viewFactors(260, PApplet.TWO_PI/7);
   tank.renderer(tankPic);
   return tank;
 }
   
-public Obstacle createObstacle(Domain domain,int xPos,int yPos) {
+public Obstacle createObstacle(int xPos,int yPos) {
   Obstacle ob = new Obstacle(new Vector2D(xPos, yPos), 100);
   obstaclePic = new BitmapPic(this, "data/tree01_v2.png");
   obstacles.add(ob);
-  //obPic = new ObstaclePic(this);
   ob.renderer(obstaclePic);
   return ob;
 }

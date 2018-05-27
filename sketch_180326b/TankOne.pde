@@ -1,20 +1,18 @@
 public class TankOne extends Vehicle{
-  int health = 10;
+  int health;
   int radius;
   Vector2D position;
   Vector2D velocity;
   Vector2D heading;
   Vector2D lastKnownPos = new Vector2D();
-  PVector acceleration;
-  boolean collision;
   Turret turret;
   Team team;
+  TankPic tankPic;
   boolean patroling = true;
   boolean retreating = false;
-  boolean fleeing = false;
-  TankPic tankPic;
-  long startTime;
   boolean home;
+  long startTime;
+ 
   ArrayList<TankOne> seenEnemies = new ArrayList<TankOne>();
   
   public TankOne(Vector2D position, double radius, Vector2D velocity, 
@@ -28,11 +26,6 @@ public class TankOne extends Vehicle{
     this.team = team;
     this.tankPic = tankPic;
   }
-
-  public void moveForward(){
-    position.add(velocity);
-
-  }
   
   public void run(){
     System.out.println(System.currentTimeMillis() - startTime);
@@ -40,43 +33,35 @@ public class TankOne extends Vehicle{
     System.out.println("posX: " + tankPic.posX+ " posY: " +tankPic.posY);
 
     if(patroling){
-       this.AP().fleeOff();
-       this.AP().obstacleAvoidOn().wanderOn();
-       this.AP().wanderOn().wanderFactors(60, 30, 20);
-       this.AP().obstacleAvoidDetectBoxLength(15);
-       //The effective range of the flee target. The flee force applied will be zero if the entity is outside the flee radius
-       //By setting the flee radius to a very large number (e.g 600) we can test that it actually works.
+       //The effective range of the flee target. The flee force applied will be zero if the entity is outside the flee radius.
+       //By setting the flee radius to a very large number (e.g 600) we can easily test that it actually works.
        this.AP().fleeRadius(600); 
        for(TankOne t : team.avoidList){
          this.AP().fleeOn(t.position.x, t.position.y); //Set location to flee from. The location is were we last saw an enemy tank.
      }
-     
      lookForTank(); 
      
    }else if(retreating){
      if(tankPic.posX < 11f && tankPic.posY < 11f){
        startTime = System.currentTimeMillis();
        home = true;
-       System.out.println("Home " + home);
-       System.out.println("###############");
        System.out.println("Report to team");
-       System.out.println("###############");
        for(TankOne t : seenEnemies){ //Report to team which enemeies the tank have seen
          System.out.println("Reporting tank " + t);
          this.team.addTankToAvoidList(t);
        }
-       //seenEnemies.clear();
+       //Clear the tanks own list of enemies to make sure it doesn't report doublets to the team
+       seenEnemies.clear();
     }
     if(System.currentTimeMillis()-startTime > 3000 && retreating && home){
        patroling = true;
        home = false;
        retreating = false;
-       fleeing = false;
        this.AP().obstacleAvoidOn().wanderOn();
        this.AP().wanderOn().wanderFactors(60, 30, 20);
        this.AP().obstacleAvoidDetectBoxLength(15);
+      }
     }
-  }
   }
   
   
@@ -96,15 +81,6 @@ public class TankOne extends Vehicle{
          System.out.println("INTE HITTAD");
       }
     }
-    
-  }
-    
-  public void rotateCounterClock(){
-    
-  }
-
-  public void rotateClock(){
-    
   }
 }
 
