@@ -95,7 +95,7 @@ public TankOne createTank(Domain domain,int xPos,int yPos, Boolean movement, Tea
   TankOne tank = new TankOne(new Vector2D(xPos,yPos), // position
   25, // collision radius
   Vector2D.ZERO, // velocity
-  70, // maximum speed
+  140, // maximum speed
   Vector2D.random(null), // heading
   1.5, // mass
   2.5f, // turning rate

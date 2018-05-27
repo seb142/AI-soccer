@@ -16,17 +16,7 @@ public class Team{
   
   public void addTankToAvoidList(TankOne tank){
       avoidList.add(tank);
-      System.out.println(tank + "tankToAvoid lagrad i team");
-      
+      System.out.println(tank + "tankToAvoid lagrad i team"); 
   }
 
-  public Vector2D getEnemyPosVector(TankOne tank){
-    Vector2D position = null;
-    for(TankOne t : avoidList){
-      if(tank == t){
-        position = new Vector2D(t.position.x, t.position.y);
-      }
-    }
-    return position;
-  }
 }

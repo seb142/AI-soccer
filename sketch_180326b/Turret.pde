@@ -1,7 +1,5 @@
 public class Turret {
   
-  //Vector2D position;
-  //Vector2D velocity;
   float xPos;
   float yPos;
   float radius;
@@ -17,7 +15,6 @@ public class Turret {
   
   public void drawTurret(){
     strokeWeight(1);
-    //fill(204, 50, 50);
     fill(0);
     ellipse(xPos,yPos,25,25);
     strokeWeight(2);

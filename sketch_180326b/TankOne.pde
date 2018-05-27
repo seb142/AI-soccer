@@ -11,6 +11,7 @@ public class TankOne extends Vehicle{
   Team team;
   boolean patroling = true;
   boolean retreating = false;
+  boolean fleeing = false;
   TankPic tankPic;
   long startTime;
   boolean home;
@@ -39,18 +40,20 @@ public class TankOne extends Vehicle{
     System.out.println("posX: " + tankPic.posX+ " posY: " +tankPic.posY);
 
     if(patroling){
-     for(TankOne t : team.avoidList){
-       if(position.x == t.position.x && position.y == t.position.y){
-         this.AP().wanderOff();
-         this.AP().fleeFactors(100);
-         this.AP().fleeOff();
-         this.AP().obstacleAvoidOn().wanderOn();
-         this.AP().wanderOn().wanderFactors(60, 30, 20);
-       }
+       this.AP().fleeOff();
+       this.AP().obstacleAvoidOn().wanderOn();
+       this.AP().wanderOn().wanderFactors(60, 30, 20);
+       this.AP().obstacleAvoidDetectBoxLength(15);
+       //The effective range of the flee target. The flee force applied will be zero if the entity is outside the flee radius
+       //By setting the flee radius to a very large number (e.g 600) we can test that it actually works.
+       this.AP().fleeRadius(600); 
+       for(TankOne t : team.avoidList){
+         this.AP().fleeOn(t.position.x, t.position.y); //Set location to flee from. The location is were we last saw an enemy tank.
      }
-      lookForTank(); 
-      
-    }else if(retreating){
+     
+     lookForTank(); 
+     
+   }else if(retreating){
      if(tankPic.posX < 11f && tankPic.posY < 11f){
        startTime = System.currentTimeMillis();
        home = true;
@@ -63,13 +66,15 @@ public class TankOne extends Vehicle{
          this.team.addTankToAvoidList(t);
        }
        //seenEnemies.clear();
-       
-    }if(System.currentTimeMillis()-startTime > 3000 && retreating && home){
+    }
+    if(System.currentTimeMillis()-startTime > 3000 && retreating && home){
        patroling = true;
        home = false;
-       retreating = false;      
+       retreating = false;
+       fleeing = false;
        this.AP().obstacleAvoidOn().wanderOn();
        this.AP().wanderOn().wanderFactors(60, 30, 20);
+       this.AP().obstacleAvoidDetectBoxLength(15);
     }
   }
   }
