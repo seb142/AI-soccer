@@ -42,7 +42,7 @@ void setup() {
   t1t5 = createTank(domain,760, height-150,false, teamB);
   t1t6 = createTank(domain,760, height-250,false, teamB);
 
-  //ob1 = createObstacle(230, 600);
+  ob1 = createObstacle(230, 600);
   ob2 = createObstacle(280, 220);
   ob3 = createObstacle(530, 520);
   
