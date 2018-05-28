@@ -1,6 +1,7 @@
 # AI-tanks
 Grupp 11
-Sebastian Bäckström Pino \n
+
+Sebastian Bäckström Pino
 Ellinor Gran
 Lovisa Lindström
 
