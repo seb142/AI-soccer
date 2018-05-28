@@ -2,8 +2,11 @@
 Grupp 11
 
 Sebastian Bäckström Pino
-Ellinor Gran
+
+Ellinor Granlund
+
 Lovisa Lindström
+
 
 Detta programm är skrivet för Processing (kan laddas ner här: https://processing.org). 
 
